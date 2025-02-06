@@ -10,7 +10,7 @@
             --primary: #2563eb;
             --secondary: #3b82f6;
             --background: #f8fafc;
-            --card-bg: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.9);
             --text: #1e293b;
             --success: #22c55e;
             --error: #ef4444;
@@ -21,68 +21,120 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            background: var(--background);
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
             color: var(--text);
             line-height: 1.6;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
         }
 
-        .header {
+        /* 主页样式 */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
         }
 
-        .header h1 {
-            font-size: 2.5rem;
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            animation: titleFloat 3s ease-in-out infinite;
         }
 
-        .header p {
-            font-size: 1.25rem;
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .dashboard-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
             color: #64748b;
         }
 
-        .nav {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-bottom: 2rem;
-            align-items: center; /* 居中按钮 */
+        /* 功能页面样式 */
+        .section {
+            display: none;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
         }
 
         .nav-button {
-            padding: 1rem 2rem;
-            border-radius: var(--radius);
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
             border: none;
+            border-radius: var(--radius);
             background: var(--primary);
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 500;
-            text-align: center;
-            box-shadow: var(--shadow);
-            width: 100%; /* 按钮宽度占满容器 */
-            max-width: 300px; /* 限制最大宽度 */
         }
 
         .nav-button:hover {
             background: var(--secondary);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .section {
-            display: none;
-            animation: fadeIn 0.3s ease-in;
         }
 
         .cv-container {
@@ -93,30 +145,10 @@
         }
 
         .cv-card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
+            background: white;
             padding: 1.5rem;
+            border-radius: var(--radius);
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
-        }
-
-        .cv-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .cv-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .rejected-position {
-            color: var(--error);
-            font-weight: 500;
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
         }
 
         .explanation-btn {
@@ -127,18 +159,11 @@
             border-radius: var(--radius);
             margin-top: 1rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
             transition: all 0.3s ease;
-            width: 100%;
-            box-shadow: var(--shadow);
         }
 
         .explanation-btn:hover {
             background: var(--secondary);
-            transform: translateY(-2px);
         }
 
         .explanation {
@@ -194,13 +219,10 @@
             border-radius: var(--radius);
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
-            box-shadow: var(--shadow);
         }
 
         .feedback-submit:hover {
             background: var(--secondary);
-            transform: translateY(-2px);
         }
 
         .feedback-note {
@@ -210,77 +232,55 @@
             text-align: center;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-            font-size: 2rem;
-            font-weight: 600;
-        }
-
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        @media (min-width: 768px) {
-            .nav {
-                flex-direction: row;
-                gap: 1rem;
-                justify-content: center; /* 大屏幕上按钮水平居中 */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
             }
-
-            .nav-button {
-                width: auto; /* 大屏幕上按钮宽度自适应 */
-                max-width: none;
+            .hero-subtitle {
+                font-size: 1.2rem;
             }
-
-            .cv-container {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-
-            .explanation-btn,
-            .feedback-submit {
-                width: auto;
+            .dashboard-cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <h1>XAI for Hiring Bias</h1>
-            <p>Transparent AI Solutions for Fair Recruitment</p>
-        </header>
-
-        <nav class="nav">
-            <button class="nav-button" onclick="showSection('applicants')">Job Applicants</button>
-            <button class="nav-button" onclick="showSection('recruiters')">Recruiters</button>
-            <button class="nav-button" onclick="showSection('providers')">LLM Providers</button>
-        </nav>
+        <!-- 主页 -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">XAI Hiring System</h1>
+                <p class="hero-subtitle">Transparent AI-Powered Recruitment Solutions</p>
+                
+                <div class="dashboard-cards">
+                    <div class="dashboard-card" onclick="showSection('applicants')">
+                        <h3 class="card-title">Job Applicants</h3>
+                        <p class="card-description">Review candidate applications with AI explanations</p>
+                    </div>
+                    
+                    <div class="dashboard-card" onclick="showSection('recruiters')">
+                        <h3 class="card-title">Recruiters</h3>
+                        <p class="card-description">Analyze recruitment process compliance and bias detection</p>
+                    </div>
+                    
+                    <div class="dashboard-card" onclick="showSection('providers')">
+                        <h3 class="card-title">LLM Providers</h3>
+                        <p class="card-description">Monitor model performance and bias mitigation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Job Applicants Section -->
         <section id="applicants" class="section">
-            <h2 class="section-title">Candidate Review</h2>
+            <button class="nav-button" onclick="backToHome()">← Back to Home</button>
+            <h2>Candidate Review</h2>
             <div class="cv-container">
                 <div class="cv-card">
                     <h3>DeepSeek Application</h3>
-                    <div class="rejected-position">Rejected for: Senior Data Scientist</div>
-                    <button class="explanation-btn" onclick="toggleSingleExplanation('app-exp1')">
-                        <span>AI Explanation</span>
-                    </button>
+                    <div class="rejected-position">Rejected for: Senior AI Scientist</div>
+                    <button class="explanation-btn" onclick="toggleSingleExplanation('app-exp1')">AI Explanation</button>
                     <div id="app-exp1" class="explanation">
                         <p>Neutral assessment based on:</p>
                         <ul>
@@ -293,9 +293,7 @@
                 <div class="cv-card">
                     <h3>OpenAI Application</h3>
                     <div class="rejected-position">Rejected for: Machine Learning Engineer</div>
-                    <button class="explanation-btn" onclick="toggleSingleExplanation('app-exp2')">
-                        <span>AI Explanation</span>
-                    </button>
+                    <button class="explanation-btn" onclick="toggleSingleExplanation('app-exp2')">AI Explanation</button>
                     <div id="app-exp2" class="explanation">
                         <p>Neutral assessment based on:</p>
                         <ul>
@@ -310,13 +308,12 @@
 
         <!-- Recruiters Section -->
         <section id="recruiters" class="section">
-            <h2 class="section-title">Recruitment Analysis</h2>
+            <button class="nav-button" onclick="backToHome()">← Back to Home</button>
+            <h2>Recruitment Analysis</h2>
             <div class="cv-container">
                 <div class="cv-card">
                     <h3>Candidate #Cosimo</h3>
-                    <button class="explanation-btn" onclick="toggleSingleExplanation('rec-exp1')">
-                        <span>Bias Analysis</span>
-                    </button>
+                    <button class="explanation-btn" onclick="toggleSingleExplanation('rec-exp1')">Bias Analysis</button>
                     <div id="rec-exp1" class="explanation">
                         <p>Potential bias detected:</p>
                         <ul>
@@ -328,9 +325,7 @@
                 </div>
                 <div class="cv-card">
                     <h3>Candidate #Ziqiang Wang</h3>
-                    <button class="explanation-btn" onclick="toggleSingleExplanation('rec-exp2')">
-                        <span>Bias Analysis</span>
-                    </button>
+                    <button class="explanation-btn" onclick="toggleSingleExplanation('rec-exp2')">Bias Analysis</button>
                     <div id="rec-exp2" class="explanation">
                         <p>Potential bias detected:</p>
                         <ul>
@@ -342,7 +337,7 @@
                 </div>
             </div>
 
-            <h3 class="section-title">Compliance Check</h3>
+            <h3>Compliance Check</h3>
             <div class="cv-container">
                 <div class="cv-card">
                     <h3>EU Compliance Report</h3>
@@ -350,13 +345,13 @@
                     <p>Full transparency in automated decision-making process</p>
                 </div>
                 <div class="cv-card">
-                    <h3>Legal Analysis</h3>
+                    <h3>Risk Assessment</h3>
                     <div class="legal-badge non-compliant">AI Act Violation Detected</div>
                     <p>Potential indirect discrimination in scoring algorithm</p>
                 </div>
             </div>
 
-            <h3 class="section-title">Feedback</h3>
+            <h3>Feedback</h3>
             <textarea class="feedback-box" placeholder="Provide feedback to improve our system..."></textarea>
             <button class="feedback-submit" onclick="submitFeedback()">Submit Feedback</button>
             <div class="feedback-note">Your feedback will be sent directly to the development team.</div>
@@ -364,13 +359,12 @@
 
         <!-- LLM Providers Section -->
         <section id="providers" class="section">
-            <h2 class="section-title">Model Diagnostics</h2>
+            <button class="nav-button" onclick="backToHome()">← Back to Home</button>
+            <h2>Model Diagnostics</h2>
             <div class="cv-container">
                 <div class="cv-card">
                     <h3>Pre-deployment Audit</h3>
-                    <button class="explanation-btn" onclick="toggleSingleExplanation('pre-test')">
-                        <span>View Report</span>
-                    </button>
+                    <button class="explanation-btn" onclick="toggleSingleExplanation('pre-test')">View Report</button>
                     <div id="pre-test" class="explanation">
                         <p>Training Data Issues:</p>
                         <ul>
@@ -382,9 +376,7 @@
                 </div>
                 <div class="cv-card">
                     <h3>Live Monitoring</h3>
-                    <button class="explanation-btn" onclick="toggleSingleExplanation('post-test')">
-                        <span>View Report</span>
-                    </button>
+                    <button class="explanation-btn" onclick="toggleSingleExplanation('post-test')">View Report</button>
                     <div id="post-test" class="explanation">
                         <p>Operational Biases Detected:</p>
                         <ul>
@@ -399,22 +391,42 @@
     </div>
 
     <script>
+        // 初始隐藏所有功能页面
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none';
+        });
+
         function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(div => {
-                div.style.display = 'none';
+            // 隐藏主页和所有其他页面
+            document.getElementById('home').style.display = 'none';
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
             });
-            document.getElementById(sectionId).style.display = 'block';
+            
+            // 显示目标页面
+            const targetSection = document.getElementById(sectionId);
+            if(targetSection) {
+                targetSection.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function backToHome() {
+            document.getElementById('home').style.display = 'flex';
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleSingleExplanation(id) {
-            // Close all explanations first
+            // 关闭所有解释内容
             document.querySelectorAll('.explanation').forEach(exp => {
                 if (exp.id !== id) {
                     exp.style.maxHeight = null;
                 }
             });
-            // Toggle the clicked explanation
+            // 切换点击的解释内容
             const explanation = document.getElementById(id);
             explanation.style.maxHeight = explanation.style.maxHeight ? 
                 null : explanation.scrollHeight + "px";
@@ -430,8 +442,10 @@
             }
         }
 
-        // Initialize first section
-        showSection('applicants');
+        // 初始显示主页
+        window.onload = () => {
+            document.getElementById('home').style.display = 'flex';
+        }
     </script>
 </body>
 </html>
